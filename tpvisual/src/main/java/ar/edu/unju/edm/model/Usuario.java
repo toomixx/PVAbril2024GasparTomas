@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 public class Usuario {
   @Id
   @NotNull
@@ -14,6 +17,8 @@ public class Usuario {
   
   private String apellido;
   
+  private String contraseña;
+
   private String tipo;
 
   public Usuario() {
@@ -49,5 +54,13 @@ public class Usuario {
 
   public void setTipo(String tipo) {
     this.tipo = tipo;
+  }
+
+  public String getContraseña() {
+    return contraseña;
+  }
+
+  public void setContraseña(String contraseña) {
+    this.contraseña = contraseña;
   }
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Selección de Usuario y Cancha</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Selección de Usuario y Cancha</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/seleccion_horario}" method="post">
+                <div class="form-group">
+                    <label for="dni">Seleccione el Usuario:</label>
+                    <select class="form-control" id="dni" name="dni" required>
+                        <!-- Aquí se deben listar todos los usuarios -->
+                        <option th:each="usuario : ${usuarios}" th:value="${usuario.dni}" th:text="${usuario.nombre + ' ' + usuario.apellido}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="codigo">Seleccione la Cancha:</label>
+                    <select class="form-control" id="codigo" name="codigo" required>
+                        <!-- Aquí se deben listar todas las canchas -->
+                        <option th:each="cancha : ${canchas}" th:value="${cancha.codigo}" th:text="'Cancha ' + ${cancha.codigo} + ' - ' + ${cancha.capacidad}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Continuar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

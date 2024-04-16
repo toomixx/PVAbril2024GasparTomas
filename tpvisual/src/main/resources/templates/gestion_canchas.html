@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Canchas</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Canchas</h1>
+    <div class="text-center mb-3">
+        <a th:href="@{/admin}" class="btn btn-success">Inicio</a>
+        <a th:href="@{/registro_cancha}" class="btn btn-success">Agregar Cancha</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Capacidad</th>
+                <th>Precio</th>
+                <th>Horario 1</th>
+                <th>Horario 2</th>
+                <th>Horario 3</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cancha : ${canchas}">
+                <td th:text="${cancha.codigo}"></td>
+                <td th:text="${cancha.capacidad}"></td>
+                <td th:text="${cancha.precio}"></td>
+                <td th:text="${cancha.horario1}"></td>
+                <td th:text="${cancha.horario2}"></td>
+                <td th:text="${cancha.horario3}"></td>
+                <td>
+                    <a th:href="@{'/modificar_cancha/' + ${cancha.codigo}}" class="btn btn-primary">Editar</a>
+                    <a href="#" class="btn btn-danger" th:onclick="'return confirmarEliminacionCancha(\'' + ${cancha.codigo} + '\');'">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function confirmarEliminacionCancha(codigo) {
+        if (confirm('¿Está seguro de que desea eliminar la cancha con código ' + codigo + '?')) {
+            // Aquí puedes agregar la lógica para eliminar la cancha
+            window.location.href = '/eliminar_cancha?codigo=' + codigo;
+        }
+    }
+</script>
+
+</body>
+</html>

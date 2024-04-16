@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seleccionar Cancha</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Seleccione Cancha</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form th:action="@{/seleccion_horario_visitante}" method="post">
+                    <input type="hidden" id="dni" name="dni" th:value="${dni}" required>
+
+                    <div class="form-group">
+                        <label for="cancha">Seleccione Cancha:</label>
+                        <select class="form-control" id="cancha" name="codigo" required>
+                            <!-- Aquí debes iterar sobre la lista de canchas -->
+                            <option th:each="cancha : ${canchas}" th:value="${cancha.codigo}" th:text="'Cancha ' + ${cancha.codigo} + ' - ' + ${cancha.capacidad}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Ver Horarios Disponibles</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enlace a Bootstrap JS y Popper.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

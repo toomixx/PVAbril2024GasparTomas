@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Horarios Disponibles</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1 class="text-center">Horarios Disponibles de la Cancha</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="@{/guardar_reserva_visitante}" method="post">
+                <div class="form-group">
+                    <label for="horario">Seleccione el Horario:</label>
+                    <select class="form-control" id="horario" name="horario" required>
+                        <option value="1" th:if="${!cancha.reserva1}" th:text="${cancha.horario1}"></option>
+                        <option value="2" th:if="${!cancha.reserva2}" th:text="${cancha.horario2}"></option>
+                        <option value="3" th:if="${!cancha.reserva3}" th:text="${cancha.horario3}"></option>
+                    </select>
+                </div>
+                <input type="hidden" name="dni" th:value="${usuario.dni}">
+                <input type="hidden" name="codigo" th:value="${cancha != null ? cancha.codigo : ''}">
+                <button type="submit" class="btn btn-primary btn-block">Reservar</button>
+            </form>
+            <a class="btn btn-primary btn-block mt-5" th:href="@{/gestion_reservas_visitante}">Cancelar</a>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

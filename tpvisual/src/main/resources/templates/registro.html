@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Reserva de Canchas</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center"><span th:text="${band}?'Registro':'Modificar'"></span></h4>
+                </div>
+                <div class="card-body">
+                    <form th:object="${usuario}" th:action="${band}?@{/registro}:@{/modificar}" method="post">
+                        <input type="hidden" th:field="*{dni}" th:if="${!band}">
+                        <div class="form-group" th:if="${band}">
+                            <label for="dni">DNI:</label>
+                            <input type="number" th:field="*{dni}" class="form-control" id="dni" name="dni" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" th:field="*{nombre}" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido">Apellido:</label>
+                            <input type="text" th:field="*{apellido}" class="form-control" id="apellido" name="apellido" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" th:field="*{contraseña}" class="form-control" id="contraseña" name="contraseña" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar Contraseña:</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="tipo">Tipo:</label>
+                          <select th:field="*{tipo}" class="form-control" id="tipo" name="tipo">
+                              <option value="VISITANTE">VISITANTE</option>
+                              <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+                          </select>
+                      </div>
+                        <button type="submit" class="btn btn-primary btn-block"><span th:text="${band}?'Guardar':'Modificar'"></span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

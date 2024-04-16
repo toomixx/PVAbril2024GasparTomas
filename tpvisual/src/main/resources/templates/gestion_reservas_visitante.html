@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Reservas (Visitante)</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Reservas (Visitante)</h1>
+    <div class="text-center mb-3">
+        <a th:href="@{/visitante}" class="btn btn-success">Inicio</a>
+        <a th:href="@{/seleccion_cancha}" class="btn btn-success">Hacer Reserva</a>
+    </div>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>DNI Usuario</th>
+              <th>Código Cancha</th>
+              <th>Horario</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="reserva : ${reservas}">
+              <td th:text="${reserva.id}"></td>
+              <td th:text="${reserva.usuario.dni}"></td>
+              <td th:text="${reserva.cancha.codigo}"></td>
+              <td th:text="${reserva.horario}"></td>
+              <td>
+                  <a href="#" class="btn btn-primary">Editar</a>
+                  <a href="#" class="btn btn-danger" th:href="@{'/eliminar_reserva_visitante?id=' + ${reserva.id}}" th:onclick="'return confirmarEliminacionReserva(' + ${reserva.id} + ');'">Eliminar</a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

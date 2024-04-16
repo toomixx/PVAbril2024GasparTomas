@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Usuarios</h1>
+    <div class="text-center mb-3">
+        <a th:href="@{/admin}" class="btn btn-success">Inicio</a>
+        <a th:href="@{/registro}" class="btn btn-success">Agregar Usuario</a>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>DNI</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí puedes iterar sobre la lista de usuarios y mostrarlos en la tabla -->
+            <!-- Ejemplo con Thymeleaf -->
+            <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.dni}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.apellido}"></td>
+                <td th:text="${usuario.tipo}"></td>
+                <td>
+                    <a th:href="@{'/modificar/' + ${usuario.dni}}" class="btn btn-primary">Editar</a>
+                    <a href="#" class="btn btn-danger" th:onclick="'return confirmarEliminacion(\'' + ${usuario.dni} + '\');'">Eliminar</a>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  
+  <!-- Enlace a Bootstrap JS y Popper.js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <script>
+      function confirmarEliminacion(dni) {
+          if (confirm('¿Está seguro de que desea eliminar el usuario con DNI ' + dni + '?')) {
+              // Aquí puedes agregar la lógica para eliminar el usuario
+              window.location.href = '/eliminar_usuario?dni=' + dni;
+          }
+      }
+  </script>
+</body>
+</html>

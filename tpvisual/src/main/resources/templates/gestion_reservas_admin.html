@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Reservas (Admin)</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Reservas (Admin)</h1>
+    <div class="text-center mb-3">
+        <a th:href="@{/admin}" class="btn btn-success">Inicio</a>
+        <a th:href="@{/seleccion_usuario_cancha}" class="btn btn-success">Agregar Reserva</a>
+    </div>
+    <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>DNI Usuario</th>
+              <th>Código Cancha</th>
+              <th>Horario</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr th:each="reserva : ${reservas}">
+              <td th:text="${reserva.id}"></td>
+              <td th:text="${reserva.usuario.dni}"></td>
+              <td th:text="${reserva.cancha.codigo}"></td>
+              <td th:text="${reserva.horario}"></td>
+              <td>
+                  <a href="#" class="btn btn-primary">Editar</a>
+                  <a href="#" class="btn btn-danger" th:onclick="'return confirmarEliminacionReserva(' + ${reserva.id} + ');'">Eliminar</a>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function confirmarEliminacionReserva(id) {
+        if (confirm('¿Está seguro de que desea eliminar la reserva con ID ' + id + '?')) {
+            window.location.href = '/eliminar_reserva?id=' + id;
+        }
+    }
+</script>
+
+</body>
+</html>

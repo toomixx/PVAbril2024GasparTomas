@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Canchas</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="text-center"><span th:text="${band}?'Registro de Canchas':'Modificar Cancha'"></span></h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form th:action="${band}?@{/guardar_cancha}:@{/modificar_cancha}" th:object="${cancha}" method="post">
+                <input type="hidden" th:field="*{codigo}">
+              <div class="form-group" th:if="${!band}">
+                    <label for="codigo">Código:</label>
+                    <input type="text" readonly class="form-control" th:field="*{codigo}" required>
+                </div>
+                <div class="form-group">
+                    <label for="capacidad">Capacidad:</label>
+                    <select class="form-control" th:field="*{capacidad}" required>
+                        <option value="FUTBOL 5">FUTBOL 5</option>
+                        <option value="FUTBOL 7">FUTBOL 7</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="precio">Precio:</label>
+                    <input type="number" class="form-control" th:field="*{precio}" required>
+                </div>
+                <div class="form-group">
+                    <label for="horarios">Horarios:</label>
+                    <input type="text" class="form-control" th:field="*{horario1}" placeholder="horario1" required>
+                    <input type="text" class="form-control mt-2" th:field="*{horario2}" placeholder="horario2" required>
+                    <input type="text" class="form-control mt-2" th:field="*{horario3}" placeholder="horario3" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><span th:text="${band}?'Guardar':'Modificar'"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Enlace a Bootstrap JS y Popper.js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
