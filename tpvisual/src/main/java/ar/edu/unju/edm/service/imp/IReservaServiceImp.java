@@ -9,9 +9,10 @@ import ar.edu.unju.edm.model.Reserva;
 import ar.edu.unju.edm.model.Usuario;
 import ar.edu.unju.edm.repository.ReservaRepository;
 import ar.edu.unju.edm.service.IReservaService;
+
 @Service
-public class IReservaServiceImp implements IReservaService{
-  @Autowired
+public class IReservaServiceImp implements IReservaService {
+    @Autowired
     private ReservaRepository reservaRepository;
 
     // Método para crear o actualizar una reserva
@@ -38,6 +39,7 @@ public class IReservaServiceImp implements IReservaService{
     public void eliminarReservaDeUsuario(Long dniUsuario, Long idReserva) {
         reservaRepository.deleteByIdAndUsuarioDni(idReserva, dniUsuario);
     }
+
     public List<Reserva> obtenerReservasPorUsuario(Usuario usuario) {
         return reservaRepository.findByUsuario(usuario);
     }

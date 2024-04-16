@@ -142,21 +142,25 @@ public class ReservaController {
         Reserva reserva = new Reserva();
         reserva.setUsuario(usuario);
         reserva.setCancha(cancha);
-        reserva.setHorario(horario);
-        reservaService.guardarReserva(reserva);
+        
+        
 
         // Actualizar el estado de reserva de la cancha
         switch (horario) {
             case "1":
+                reserva.setHorario(cancha.getHorario1());
                 cancha.setReserva1(true);
                 break;
             case "2":
+                reserva.setHorario(cancha.getHorario2());
                 cancha.setReserva2(true);
                 break;
             case "3":
+                reserva.setHorario(cancha.getHorario3());
                 cancha.setReserva3(true);
                 break;
         }
+        reservaService.guardarReserva(reserva);
         canchaService.guardarCancha(cancha);
 
         return "redirect:/gestion_reservas_admin";
@@ -178,7 +182,7 @@ public class ReservaController {
         
         // Obtener el usuario autenticado
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String dni = auth.getName(); // Aquí asumo que el username del usuario autenticado es su dni
+        String dni = auth.getName(); 
         
         Usuario usuario = usuarioService.buscarUsuario(Long.parseLong(dni));
         Cancha cancha = canchaService.obtenerCanchaPorCodigo(codigo);
@@ -200,18 +204,20 @@ public class ReservaController {
         Reserva reserva = new Reserva();
         reserva.setUsuario(usuario);
         reserva.setCancha(cancha);
-        reserva.setHorario(horario);
         reservaService.guardarReserva(reserva);
 
         // Actualizar el estado de reserva de la cancha
         switch (horario) {
             case "1":
+                reserva.setHorario(cancha.getHorario1());
                 cancha.setReserva1(true);
                 break;
             case "2":
+                reserva.setHorario(cancha.getHorario2());
                 cancha.setReserva2(true);
                 break;
             case "3":
+                reserva.setHorario(cancha.getHorario3());
                 cancha.setReserva3(true);
                 break;
         }

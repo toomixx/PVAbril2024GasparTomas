@@ -44,6 +44,7 @@ public class UsuarioController {
     if (!usuario.getContraseña().equals(confirmPassword)) {
       modelAndView.setViewName("registro");
       modelAndView.addObject("error", "Las contraseñas no coinciden");
+      modelAndView.addObject("band",true);
       return modelAndView;
     }
     // Aquí puedes implementar la lógica para guardar el usuario en la base de datos
@@ -88,9 +89,9 @@ public class UsuarioController {
     return vista;
   }
   @GetMapping("/eliminar_usuario")
-    public ModelAndView eliminarUsuario(@RequestParam Long dni) {
-        ModelAndView modelAndView = new ModelAndView("redirect:/gestion_usuarios");
-        usuarioService.eliminarUsuario(dni);
-        return modelAndView;
-    }
+  public ModelAndView eliminarUsuario(@RequestParam Long dni) {
+    ModelAndView modelAndView = new ModelAndView("redirect:/gestion_usuarios");
+    usuarioService.eliminarUsuario(dni);
+    return modelAndView;
+  }
 }

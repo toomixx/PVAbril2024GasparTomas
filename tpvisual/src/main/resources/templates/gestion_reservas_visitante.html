@@ -31,7 +31,6 @@
               <td th:text="${reserva.cancha.codigo}"></td>
               <td th:text="${reserva.horario}"></td>
               <td>
-                  <a href="#" class="btn btn-primary">Editar</a>
                   <a href="#" class="btn btn-danger" th:href="@{'/eliminar_reserva_visitante?id=' + ${reserva.id}}" th:onclick="'return confirmarEliminacionReserva(' + ${reserva.id} + ');'">Eliminar</a>
               </td>
           </tr>

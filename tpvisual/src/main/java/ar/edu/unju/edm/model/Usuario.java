@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class Usuario {
   @Id
   @NotNull
-  private Long dni;
+  private Long dni; //clave principal
   
   private String nombre;
   
